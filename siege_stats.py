@@ -12,13 +12,9 @@ def extract_source(url):
 
 def extract_data(source):
      soup=bs4.BeautifulSoup(source, 'lxml')
-     names=soup.find_all('div')
-     for i in names:
-     print i
+     ranked = soup.find_all('div', class_='content')
+     rank = ranked[0]
+     print rank.text
+     
 
 extract_data(extract_source(my_url))
-
-uClient = uReq(my_url)
-page_html = uClient.read()
-uClient.close()
-page_soup = soup(page_html, "lxml")
