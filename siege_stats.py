@@ -5,9 +5,6 @@ from bs4 import BeautifulSoup as soup
 my_url = 'https://r6stats.com/stats/uplay/Reload316/ranked'
 #Will use main ubi site if can bypass browser error
 
-
-
-
 agent = {"User-Agent":"Mozilla/5.0"}
 source = requests.get(my_url, headers=agent).text
 
