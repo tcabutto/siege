@@ -8,7 +8,10 @@ my_url = 'https://r6stats.com/stats/uplay/Reload316/ranked'
 agent = {"User-Agent":"Mozilla/5.0"}
 source = requests.get(my_url, headers=agent).text
 
+#grabs the source that was generated from the website using the lxml library.
 page_soup = soup(source, 'lxml')
+
+#Beginning to narrow down the data to what is specifically trying to obtain.
 row1 = page_soup.find('div', class_='row stats')
 row2 = page_soup.find('div', class_='row stats second')
 
@@ -16,13 +19,14 @@ row2 = page_soup.find('div', class_='row stats second')
 vals1 = row1.find_all('div', class_='value')
 vals2 = row2.find_all('div', class_='value')
 
+#Preparing to write to csv file.
 filename = 'r6stats.csv'
 f = open(filename, 'w')
 
 headers = "kills, deaths, K/D ratio, playtime, record, win percentage, XP until lvl up, overall level\n"
 f.write(headers)
 
-kills       = vals1[0].text.strip()
+kills       = vals1[0].text.strip() #Used strip to clean up white spaces.
 deaths      = vals1[1].text.strip()
 kd          = vals1[2].text.strip()
 playtime    = vals1[3].text.strip()
